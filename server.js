@@ -106,7 +106,7 @@ app.post('/signup',async(req,res)=>{
         res.json({email,token,userId})
     } catch (error) {
         if(error){
-            res.json({detail:error.detail})
+            res.json({failed:error.detail})
         }
     }
 })
