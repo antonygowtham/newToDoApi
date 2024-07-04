@@ -5,7 +5,11 @@ import bcrypt from "bcrypt"
 import {v4 as uuidv4} from "uuid"
 import cors from "cors"
 import morgan from "morgan"
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
+console.log("check",__dirname)
 const app=express()
 const port=4000
 
@@ -13,6 +17,11 @@ const port=4000
 app.use(cors())
 app.use(express.json())
 app.use(morgan("combined"));
+
+// get Documentation
+app.get('/', (req, res) => {
+    res.sendFile(__dirname+"/documentation.html");
+});
 
 // get all todos
 app.get('/todos/:userId', async (req, res) => {

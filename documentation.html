@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Documentation</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container my-5">
+    <h1 class="mb-4">API Documentation</h1>
+    
+    <h2>Base URL</h2>
+    <pre><code>https://newtodoapi-0ddi.onrender.com/</code></pre>
+    
+    <h2 class="mt-4">Routes</h2>
+    
+    <div class="card my-3">
+      <div class="card-header">
+        <h3>1. Sign Up</h3>
+      </div>
+      <div class="card-body">
+        <p><strong>URL:</strong> <code>/signup</code></p>
+        <p><strong>Method:</strong> POST</p>
+        <p><strong>Description:</strong> Registers a new user and returns a token.</p>
+        <h5>Request Body:</h5>
+        <pre><code>{
+  "email": "example@example.com",
+  "password": "password123"
+}</code></pre>
+        <h5>Response:</h5>
+        <pre><code>{
+  "email": "example@example.com",
+  "token": "jwt_token_here",
+  "userId": "user_id_here"
+}</code></pre>
+        <h5>Error Response:</h5>
+        <pre><code>{
+  "failed": "error_detail_here"
+}</code></pre>
+      </div>
+    </div>
+    
+    <div class="card my-3">
+      <div class="card-header">
+        <h3>2. Log In</h3>
+      </div>
+      <div class="card-body">
+        <p><strong>URL:</strong> <code>/login</code></p>
+        <p><strong>Method:</strong> POST</p>
+        <p><strong>Description:</strong> Logs in a user and returns a token.</p>
+        <h5>Request Body:</h5>
+        <pre><code>{
+  "email": "example@example.com",
+  "password": "password123"
+}</code></pre>
+        <h5>Response:</h5>
+        <pre><code>{
+  "email": "example@example.com",
+  "token": "jwt_token_here",
+  "userId": "user_id_here"
+}</code></pre>
+        <h5>Error Response:</h5>
+        <pre><code>{
+  "failed": "user does not exist"
+}</code></pre>
+        <pre><code>{
+  "failed": "password incorrect !"
+}</code></pre>
+      </div>
+    </div>
+    
+    <div class="card my-3">
+      <div class="card-header">
+        <h3>3. Get All Todos</h3>
+      </div>
+      <div class="card-body">
+        <p><strong>URL:</strong> <code>/todos/:userId</code></p>
+        <p><strong>Method:</strong> GET</p>
+        <p><strong>Description:</strong> Retrieves all incomplete todos for a user.</p>
+        <p><strong>URL Parameters:</strong></p>
+        <ul>
+          <li><code>userId</code> (string): ID of the user.</li>
+        </ul>
+        <h5>Response:</h5>
+        <pre><code>[
+  {
+    "id": "todo_id_here",
+    "title": "Task Title",
+    "date": "2023-07-04",
+    "category": "Work",
+    "progress": 50,
+    "is_finished": false,
+    "user_id": "user_id_here"
+  },
+  ...
+]</code></pre>
+      </div>
+    </div>
+    
+    <div class="card my-3">
+      <div class="card-header">
+        <h3>4. Create a New Todo</h3>
+      </div>
+      <div class="card-body">
+        <p><strong>URL:</strong> <code>/todos</code></p>
+        <p><strong>Method:</strong> POST</p>
+        <p><strong>Description:</strong> Creates a new todo for a user.</p>
+        <h5>Request Body:</h5>
+        <pre><code>{
+  "user_id": "user_id_here",
+  "title": "Task Title",
+  "progress": 0,
+  "date": "2023-07-04",
+  "category": "Work"
+}</code></pre>
+        <h5>Response:</h5>
+        <pre><code>{
+  "command": "INSERT",
+  "rowCount": 1,
+  "oid": 0,
+  "rows": [],
+  "fields": [],
+  "_parsers": [],
+  "_types": {
+    "_types": {},
+    "text": {},
+    "binary": {}
+  },
+  "RowCtor": null,
+  "rowAsArray": false
+}</code></pre>
+        <h5>Error Response:</h5>
+        <pre><code>{
+  "failed": "error_detail_here"
+}</code></pre>
+      </div>
+    </div>
+    
+    <div class="card my-3">
+      <div class="card-header">
+        <h3>5. Edit a Todo</h3>
+      </div>
+      <div class="card-body">
+        <p><strong>URL:</strong> <code>/todos/:id</code></p>
+        <p><strong>Method:</strong> PATCH</p>
+        <p><strong>Description:</strong> Edits an existing todo.</p>
+        <p><strong>URL Parameters:</strong></p>
+        <ul>
+          <li><code>id</code> (string): ID of the todo to edit.</li>
+        </ul>
+        <h5>Request Body:</h5>
+        <pre><code>{
+  "user_id": "user_id_here",
+  "title": "Updated Task Title",
+  "progress": 75,
+  "date": "2023-07-05",
+  "category": "Personal"
+}</code></pre>
+        <h5>Response:</h5>
+        <pre><code>{
+  "command": "UPDATE",
+  "rowCount": 1,
+  "oid": 0,
+  "rows": [],
+  "fields": [],
+  "_parsers": [],
+  "_types": {
+    "_types": {},
+    "text": {},
+    "binary": {}
+  },
+  "RowCtor": null,
+  "rowAsArray": false
+}</code></pre>
+        <h5>Error Response:</h5>
+        <pre><code>{
+  "failed": "error_detail_here"
+}</code></pre>
+      </div>
+    </div>
+    
+    <div class="card my-3">
+      <div class="card-header">
+        <h3>6. Delete a Todo</h3>
+      </div>
+      <div class="card-body">
+        <p><strong>URL:</strong> <code>/todos/:id</code></p>
+        <p><strong>Method:</strong> DELETE</p>
+        <p><strong>Description:</strong> Deletes a todo.</p>
+        <p><strong>URL Parameters:</strong></p>
+        <ul>
+          <li><code>id</code> (string): ID of the todo to delete.</li>
+        </ul>
+        <h5>Response:</h5>
+        <pre><code>{
+  "command": "DELETE",
+  "rowCount": 1,
+  "oid": 0,
+  "rows": [],
+  "fields": [],
+  "_parsers": [],
+  "_types": {
+    "_types": {},
+    "text": {},
+    "binary": {}
+  },
+  "RowCtor": null,
+  "rowAsArray": false
+}</code></pre>
+        <h5>Error Response:</h5>
+        <pre><code>{
+  "failed": "error_detail_here"
+}</code></pre>
+      </div>
+    </div>
+    
+    <div class="card my-3">
+      <div class="card-header">
+        <h3>7. Filter Todos</h3>
+      </div>
+      <div class="card-body">
+        <p><strong>URL:</strong> <code>/todos/:userId/:type/:value</code></p>
+        <p><strong>Method:</strong> GET</p>
+        <p><strong>Description:</strong> Filters todos based on type and value.</p>
+        <p><strong>URL Parameters:</strong></p>
+        <ul>
+          <li><code>userId</code> (string): ID of the user.</li>
+          <li><code>type</code> (string): Type of filter (e.g., <code>category</code>, <code>is_finished</code>).</li>
+          <li><code>value</code> (string): Value to filter by.</li>
+        </ul>
+        <h5>Response:</h5>
+        <pre><code>[
+  {
+    "id": "todo_id_here",
+    "title": "Task Title",
+    "date": "2023-07-04",
+    "category": "Work",
+    "progress": 50,
+    "is_finished": false,
+    "user_id": "user_id_here"
+  },
+  ...
+]</code></pre>
+        <h5>Error Response:</h5>
+        <pre><code>{
+  "failed": "error_detail_here"
+}</code></pre>
+      </div>
+    </div>
+    
+    <div class="card my-3">
+      <div class="card-header">
+        <h3>8. Get Todo Types</h3>
+      </div>
+      <div class="card-body">
+        <p><strong>URL:</strong> <code>/types/:userId</code></p>
+        <p><strong>Method:</strong> GET</p>
+        <p><strong>Description:</strong> Retrieves distinct categories of todos for a user.</p>
+        <p><strong>URL Parameters:</strong></p>
+        <ul>
+          <li><code>userId</code> (string): ID of the user.</li>
+        </ul>
+        <h5>Response:</h5>
+        <pre><code>[
+  {
+    "category": "Work"
+  },
+  {
+    "category": "Personal"
+  },
+  ...
+]</code></pre>
+        <h5>Error Response:</h5>
+        <pre><code>{
+  "failed": "error_detail_here"
+}</code></pre>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+
