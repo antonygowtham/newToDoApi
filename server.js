@@ -2,15 +2,17 @@ import express from "express"
 import pool from "./db.js"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
-import {v4 as uuidv4} from "uuid";
+import {v4 as uuidv4} from "uuid"
 import cors from "cors"
+import morgan from "morgan"
 
 const app=express()
 const port=4000
 
+
 app.use(cors())
 app.use(express.json())
-
+app.use(morgan("combined"));
 
 // get all todos
 app.get('/todos/:userId', async (req, res) => {
